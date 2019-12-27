@@ -1,0 +1,7 @@
+{
+    "schemaType": "LAUNCHER",
+    "id": "blue-steel-launcher",
+    "description": "Describe me",
+    "displayName": "BlueSteelLauncher",
+    "rootNerdletId": "blue-steel-nerdlet"
+}
