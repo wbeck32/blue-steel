@@ -1,9 +1,23 @@
 import React from 'react';
+import BlueSteelNerdlet from './main';
+import { PlatformStateContext, NerdletStateContext } from 'nr1';
 
-// https://docs.newrelic.com/docs/new-relic-programmable-platform-introduction
 
-export default class BlueSteelNerdletNerdlet extends React.Component {
-    render() {
-        return <h1>Hello, blue-steel-nerdlet Nerdlet!</h1>;
-    }
+export default class Wrapper extends React.PureComponent {
+	render() {
+		return (
+			<PlatformStateContext.Consumer>
+				{platformUrlState => (
+					<NerdletStateContext.Consumer>
+						{nerdletUrlState => (
+							<BlueSteelNerdlet
+								launcherUrlState={platformUrlState}
+								nerdletUrlState={nerdletUrlState}
+							/>
+						)}
+					</NerdletStateContext.Consumer>
+				)}
+			</PlatformStateContext.Consumer>
+		);
+	}
 }
