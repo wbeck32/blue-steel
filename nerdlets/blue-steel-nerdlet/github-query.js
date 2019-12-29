@@ -12,7 +12,7 @@ export default function q(
     cache: 'no-cache',
     headers: {
       'Content-Type': 'application/json',
-      Authorization: 'token eff97dfda12fe8239188b5756ade4abdde15d38a'
+      Authorization: 'token '
     },
     body: JSON.stringify(data)
   })
