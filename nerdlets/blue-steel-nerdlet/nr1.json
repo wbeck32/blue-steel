@@ -1,13 +1,6 @@
 {
     "schemaType": "NERDLET",
     "id": "blue-steel-nerdlet",
-    "displayName": "BlueSteel",
-    "description": "",
-    "entities": [
-        {
-            "domain": "BROWSER",
-            "type": "APPLICATION"
-        }
-    ],
-    "actionCategory": "monitor"
+    "displayName": "BlueSteelNerdlet",
+    "description": ""
 }

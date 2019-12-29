@@ -1,23 +1,16 @@
-import React from 'react';
-import BlueSteelNerdlet from './main';
-import { PlatformStateContext, NerdletStateContext } from 'nr1';
+import React, { Component } from 'react';
+import { Button } from 'nr1';
+import q from './github-query';
 
+// https://docs.newrelic.com/docs/new-relic-programmable-platform-introduction
 
-export default class Wrapper extends React.PureComponent {
-	render() {
-		return (
-			<PlatformStateContext.Consumer>
-				{platformUrlState => (
-					<NerdletStateContext.Consumer>
-						{nerdletUrlState => (
-							<BlueSteelNerdlet
-								launcherUrlState={platformUrlState}
-								nerdletUrlState={nerdletUrlState}
-							/>
-						)}
-					</NerdletStateContext.Consumer>
-				)}
-			</PlatformStateContext.Consumer>
-		);
-	}
+export default class BlueSteelNerdlet extends Component {
+  getStuff = async () => {
+    const m = await q();
+    return m;
+  };
+
+  render() {
+    return <Button onClick={() => this.getStuff()}>clicky</Button>;
+  }
 }
