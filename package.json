@@ -1,35 +1,22 @@
 {
-  "private": true,
-  "name": "blue-steel",
-  "version": "0.1.0",
-  "scripts": {
-    "start": "nr1 nerdpack:serve",
-    "test": "exit 0"
-  },
-  "nr1": {
-    "uuid": "52af6de9-1e68-41a0-a870-7fa0a4469460"
-  },
-  "dependencies": {
-    "prop-types": "^15.6.2",
-    "react": "^16.6.3",
-    "react-dom": "^16.6.3",
-    "react-hot-loader": "^4.12.18"
-  },
-  "devDependencies": {
-    "@babel/core": "^7.2.2",
-    "@babel/helpers": "^7.6.2",
-    "@babel/plugin-proposal-class-properties": "^7.5.5",
-    "@babel/plugin-proposal-object-rest-spread": "^7.6.2",
-    "@babel/plugin-syntax-dynamic-import": "^7.2.0",
-    "@babel/plugin-transform-async-to-generator": "^7.5.0",
-    "@babel/plugin-transform-runtime": "^7.6.2",
-    "@babel/preset-env": "^7.3.1",
-    "@babel/register": "^7.6.2",
-    "@babel/runtime": "^7.6.3"
-  },
-  "browserslist": [
-    "last 2 versions",
-    "not ie < 11",
-    "not dead"
-  ]
+    "private": true,
+    "name": "blue-steel",
+    "version": "0.1.0",
+    "scripts": {
+        "start": "nr1 nerdpack:serve",
+        "test": "exit 0"
+    },
+    "nr1": {
+        "uuid": "0da6966f-6f51-46bd-a5e7-5ea6d910eea2"
+    },
+    "dependencies": {
+        "prop-types": "^15.6.2",
+        "react": "^16.6.3",
+        "react-dom": "^16.6.3"
+    },
+    "browserslist": [
+        "last 2 versions",
+        "not ie < 11",
+        "not dead"
+    ]
 }
