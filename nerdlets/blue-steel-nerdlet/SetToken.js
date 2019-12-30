@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
-import { TextField,Button, StackItem, Stack } from 'nr1';
-import PropTypes from 'prop-types';
+import { TextField,Button } from 'nr1';
 
 const SetToken = props => {
-	let {githubToken, setGithubToken} = props
+	let {githubToken, setGithubToken, getRepoData} = props
+	console.log('githubToken: ', githubToken);
 
 	const handleChange = e => {
 		githubToken = e.target.value
@@ -11,23 +11,19 @@ const SetToken = props => {
 	return (
 		<div>
 			{!githubToken && <div>
-				<StackItem grow>
-					<TextField
-						autofocus
-						label="GitHub Token"
-						placeholder="Paste your user token here"
-						onChange={e => handleChange(e)}
-					/>
-				</StackItem>
-				<StackItem>
-					<Button
-						onClick={() => setGithubToken(githubToken)}
-						type="primary"
-					>
+				<TextField
+					autofocus
+					label="GitHub Token"
+					placeholder='paste your Github personal access token here'
+					onChange={e => handleChange(e)}
+				/>
+				<Button
+					onClick={() => setGithubToken(githubToken)}
+					type="primary"
+				>
               Set Your GitHub Token
-					</Button>
-				</StackItem>
-			</div>}
+				</Button></div>
+			}
 		</div>
 	);
 };

@@ -1,39 +1,31 @@
-import React from 'react'
-import {Button } from 'nr1'
+import React, {Component} from 'react';
 const fetch = require(`cross-fetch`);
-const apiUrl = `https://api.github.com/graphql`;
 
-const RepoTable = props => {
-	console.log('props: ', props);
-	const {retrieveGithubToken,githubToken} = props
-
-	const query = (
-		apiUrl,
-		data = {
-			query: `query {  viewer { login }}`,
-			variables: null
+export default class RepoTable extends Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			githubToken: props.githubToken || null,
+			repoData: props.repoData || null
 		}
-	) => {
-		return fetch(apiUrl, {
-			method: `POST`,
-			mode: `cors`,
-			cache: `no-cache`,
-			headers: {
-				"Content-Type": `application/json`,
-				Authorization: `token process.env.GITHUB_PERSONAL_TOKEN`
-			},
-			body: JSON.stringify(data)
-		})
-				.then(val => val.json())
-				.then(f => f);
-	};
-	return (
-		<div>
+	}
 
 
-			<Button onClick={e=>retrieveGithubToken(e)}>vlic</Button>
-		</div>
-	)
+	componentDidMount() {
+		const {getRepoData} = this.props
+		const d = getRepoData(`https://api.github.com/graphql`)
+		console.log('d: ', d, this);
+	}
+
+
+
+
+	render() {
+		console.log('this: ', this.props, this.state);
+		const {repoData} =this.props
+		console.log('repoData: ', repoData, this);
+		return(
+			<div>{repoData}WHAAAAATTT</div>
+		)
+	}
 }
-
-export default RepoTable;

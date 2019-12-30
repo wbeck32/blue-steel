@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import TokenContainer from './TokenContainer'
-import TableContainer from './TableContainer';
+import PageContainer from './PageContainer'
+import PropTypes from 'prop-types';
 
 export default class BlueSteelNerdlet extends Component {
 	constructor(props) {
@@ -11,11 +11,9 @@ export default class BlueSteelNerdlet extends Component {
 	}
 
 	render() {
-		console.log('this.state: ', this.state);
 		return (
 			<div>
-				<TokenContainer {...this.state}/>
-				<TableContainer {...this.state}/>
+				<PageContainer {...this.state}/>
 			</div>
 		);
 	}
