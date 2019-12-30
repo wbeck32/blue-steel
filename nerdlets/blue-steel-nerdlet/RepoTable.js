@@ -23,15 +23,26 @@ export default class RepoTable extends Component {
 		const {repoData} = this.props
 		return(
 			<div>
+
 				{repoData.data &&
-			<Stack>
-				{repoData.data.viewer.repositories.nodes.map(n=>{
-					let name = n.name;
-					<StackItem columnSpan={2}>
-						{name}
-					</StackItem>
-				})}
-			</Stack>
+					<Grid>
+						{repoData.data.viewer.repositories.nodes.map(n=>{
+							return(
+								<>
+									<GridItem key={`id-${n.createdAt}`} columnSpan={2}>
+										<BlockText>
+											{n.name}
+										</BlockText>
+									</GridItem>
+									<GridItem key={`id-${n.createdAt}`} columnSpan={2}>
+										<BlockText>{n.createdAt}</BlockText>
+									</GridItem>
+								</>
+							)
+						})}
+					</Grid>
+
+
 				}
 			</div>
 		)
