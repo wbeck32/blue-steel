@@ -1,24 +1,26 @@
 import React, { Component } from 'react';
-import { Toast, UserStorageMutation } from 'nr1';
+import { Toast, UserStorageMutation, UserStorageQuery } from 'nr1';
 import query from './utils/github-query';
 import ErrorBoundary from './utils/ErrorBoundary';
-import Setup from './setup'
+import Setup from './Setup'
 // https://docs.newrelic.com/docs/new-relic-programmable-platform-introduction
 
 export default class BlueSteelNerdlet extends Component {
 	constructor(props) {
 		super(props);
-		this._getStuff = this._getStuff.bind(this);
+		this._getRepoData = this._getRepoData.bind(this);
 		this._setGithubToken = this._setGithubToken.bind(this);
+		this._retrieveGithubToken = this._retrieveGithubToken.bind(this);
+
 		this.state = {
-			githubToken: 1234,
+			githubToken: null,
+			isTokenSet:false
 		};
 	}
 
-	_getStuff = async () => {
-		const myRepos = await query();
-
-		return myRepos;
+	_getRepoData = async () => {
+		const repoData = await query();
+		return repoData;
 	};
 
 	_setGithubToken = async githubToken => {
@@ -29,7 +31,7 @@ export default class BlueSteelNerdlet extends Component {
 			document: { githubToken }
 		})
 				.then(() => {
-					this.setState({githubToken})
+					this.setState({githubToken, isTokenSet:true})
 					Toast.showToast({
 						title: `Update Saved.`,
 						type: Toast.TYPE.NORMAL
@@ -44,13 +46,37 @@ export default class BlueSteelNerdlet extends Component {
 				});
 	}
 
-	render() {
-		console.log('this.state: ', this.state);
+	_retrieveGithubToken = async () => {
+		UserStorageQuery.query({
+			collection: `blue-steel`,
+			documentId: 'global'
+		})
+				.then(data => {
+					console.log('data: ', data);
+					if (!data) {
+						console.log(`Cannot`);
+					}
+					console.debug(data);
+					this.setState({ githubToken: data.githubToken });
+				})
+				.catch(error => {
+					console.error(error);
+					this.setState({ githubToken: `` });
+					Toast.showToast({
+						title: error.message,
+						type: Toast.TYPE.CRITICAL
+					});
+				});
+	};
 
+	render() {
+		const {isTokenSet} = this.state
+		console.log('this.state: ', this.state);
 		return (
 			<div>
 				<ErrorBoundary>
-					<Setup {...this.state} setGithubToken={this._setGithubToken}></Setup>
+					{!isTokenSet && <Setup {...this.state} setGithubToken={this._setGithubToken}></Setup>}
+					{isTokenSet && <Setup {...this.state} retrieveGithubToken={this._retrieveGithubToken}></Setup>}
 				</ErrorBoundary>
 			</div>
 		);

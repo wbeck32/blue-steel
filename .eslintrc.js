@@ -23,36 +23,37 @@ module.exports = {
       2,
       "always",
       {
-        arraysInArrays: false,
-        objectsInArrays: true,
-        singleValue: true
+        "arraysInArrays": false,
+        "objectsInArrays": true,
+        "singleValue": true
       }
     ],
     "arrow-parens": [
       2,
       "as-needed",
       {
-        requireForBlockBody: false
+        "requireForBlockBody": false
       }
     ],
-    "array-element-newline": ["error", "never"],
-    eqeqeq: [2, "always"],
-    indent: [
+		"array-element-newline": ["error", "never"],
+		"dot-location": [ "error", "property" ],
+    "eqeqeq": [2, "always"],
+    "indent": [
       2,
       "tab",
       {
-        SwitchCase: 1,
-        MemberExpression: 2,
-        ObjectExpression: 1
+        "SwitchCase": 1,
+        "MemberExpression": 2,
+        "ObjectExpression": 1
       }
     ],
-    "newline-before-return": "error",
     "no-multi-spaces": [
       2,
       {
-        ignoreEOLComments: true
+        "ignoreEOLComments": true
       }
     ],
-    "no-tabs": [2, { allowIndentationTabs: true }]
+		"no-tabs": [2, { "allowIndentationTabs": true }],
+		"padding-line-between-statements": ["error",{blankLine: "never", prev: "*", next: "return"}]
   }
 };
