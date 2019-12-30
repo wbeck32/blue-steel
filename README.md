@@ -4,7 +4,7 @@
 
 This application uses NerdStorage to store and retrieve your Github personal access token. You can then configure a GraphQl query and trigger it to retrieve the specified data from your account.
 
-Ideally, it will iterate through your data and display it in a table.
+Ideally, it will iterate through your data and display it in a table. It's not doing that yet though.
 
 ![Screenshot #1](screenshots/screenshot_01.png)
 
