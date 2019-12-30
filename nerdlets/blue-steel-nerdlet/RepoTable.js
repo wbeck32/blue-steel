@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 const fetch = require(`cross-fetch`);
+import queries from './queries'
 
 export default class RepoTable extends Component {
 	constructor(props) {
@@ -9,18 +10,18 @@ export default class RepoTable extends Component {
 		}
 	}
 
-
 	componentDidMount() {
 		const {getRepoData} = this.props
-		return getRepoData(`https://api.github.com/graphql`)
+		return getRepoData(`https://api.github.com/graphql`, {query:queries[0]})
 	}
-
 
 
 
 	render() {
 		const {repoData} =this.props
-		let tmp = repoData ? repoData.data.viewer.login : 'whut'
+		console.log('this.propssss: ', repoData, typeof repoData);
+		let tmp = repoData ? repoData.data : []
+		console.log('tmp: ', tmp, typeof tmp);
 		return(
 			<div>{tmp}WHAAAAATTT</div>
 		)

@@ -11,6 +11,7 @@ export default class PageContainer extends Component {
 		this._query = this._query.bind(this);
 		this.state = {
 			githubToken: props.githubToken || null,
+			repoData: props.repoData || []
 		}
 	}
 
@@ -38,6 +39,7 @@ export default class PageContainer extends Component {
 	}
 
 	_query = async (apiUrl, data = {query: `query {  viewer { login }}`,variables: null}) => {
+		const rd = []
 		return await fetch(apiUrl, {
 			method: `POST`,
 			mode: `cors`,
