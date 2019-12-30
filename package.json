@@ -16,7 +16,7 @@
         "babel-preset-env": "^1.7.0",
         "babel-register": "^6.26.0",
         "cross-fetch": "^3.0.4",
-        "prop-types": "^15.6.2",
+        "prop-types": "^15.7.2",
         "react": "^16.6.3",
         "react-dom": "^16.6.3"
     },

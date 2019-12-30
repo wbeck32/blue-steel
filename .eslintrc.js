@@ -4,9 +4,6 @@ module.exports = {
       "es6": true
   },
   "extends": [
-      'plugin:@newrelic/eslint-plugin-newrelic/react',
-      'plugin:@newrelic/eslint-plugin-newrelic/jest',
-      'plugin:@newrelic/eslint-plugin-newrelic/prettier'
   ],
   "globals": {
       "Atomics": "readonly",
@@ -22,9 +19,35 @@ module.exports = {
   },
   "plugins": [
       "react",
-      "prettier"
   ],
   "rules": {
-      "prettier/prettier": "error"
+    "array-bracket-newline": [ 2,"never", { "multiline": false } ],
+    "array-bracket-spacing": [ 2, "always",
+        {
+            "arraysInArrays": false,
+            "objectsInArrays": true,
+            "singleValue": true
+        }
+    ],
+    "arrow-parens": [ 2, "as-needed",
+		{
+			"requireForBlockBody": false
+		} ],
+    "array-element-newline": [ "error", "never" ],
+    "eqeqeq": [ 2, "always" ],
+    "indent": [ 2, "tab",
+        {
+            "SwitchCase": 1,
+            "MemberExpression":2,
+            "ObjectExpression": 1
+        }
+    ],
+    "newline-before-return": "error",
+    "no-multi-spaces": [ 2,
+		{
+			"ignoreEOLComments": true
+		}
+	],
+    "no-tabs":[ 2, { "allowIndentationTabs": true } ]
   }
-};
+  }
