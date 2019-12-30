@@ -11,7 +11,6 @@ export default class PageContainer extends Component {
 		this._query = this._query.bind(this);
 		this.state = {
 			githubToken: props.githubToken || null,
-			repoData: props.repoData || null
 		}
 	}
 
@@ -56,7 +55,6 @@ export default class PageContainer extends Component {
 
 	render() {
 		const {githubToken, repoData} = this.state
-		console.log('this.state: ', this.state);
 		return (
 			<>
 				{githubToken && <RepoTable {...this.state} getRepoData={this._query} repoData={repoData}/>}

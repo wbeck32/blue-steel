@@ -6,26 +6,23 @@ export default class RepoTable extends Component {
 		super(props);
 		this.state = {
 			githubToken: props.githubToken || null,
-			repoData: props.repoData || null
 		}
 	}
 
 
 	componentDidMount() {
 		const {getRepoData} = this.props
-		const d = getRepoData(`https://api.github.com/graphql`)
-		console.log('d: ', d, this);
+		return getRepoData(`https://api.github.com/graphql`)
 	}
 
 
 
 
 	render() {
-		console.log('this: ', this.props, this.state);
 		const {repoData} =this.props
-		console.log('repoData: ', repoData, this);
+		let tmp = repoData ? repoData.data.viewer.login : 'whut'
 		return(
-			<div>{repoData}WHAAAAATTT</div>
+			<div>{tmp}WHAAAAATTT</div>
 		)
 	}
 }

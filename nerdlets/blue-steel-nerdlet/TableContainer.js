@@ -7,11 +7,13 @@ export default class TableContainer extends Component {
 		super(props);
 		this._getRepoData = this._getRepoData.bind(this);
 		this._retrieveGithubToken = this._retrieveGithubToken.bind(this);
+		this.state = {
+			githubToken:props.githubToken ||null
+		}
 	}
 
 	_retrieveGithubToken = async e => {
 		console.log('e: ', e);
-		console.log(9999)
 		UserStorageQuery.query({
 			collection: `blue-steel`,
 			documentId: 'global'
@@ -43,9 +45,6 @@ export default class TableContainer extends Component {
 		return(
 			<div>
 				<RepoTable {...this.state} retrieveGithubToken={this._retrieveGithubToken}/>
-
 			</div>)
-
-
 	}
 }

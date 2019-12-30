@@ -6,6 +6,9 @@ export default class TokenContainer extends Component {
 	constructor(props) {
 		super(props);
 		this._setGithubToken = this._setGithubToken.bind(this);
+		this.state = {
+			githubToken:props.githubToken || null
+		}
 	}
 
 	_setGithubToken = async githubToken => {
@@ -32,6 +35,7 @@ export default class TokenContainer extends Component {
 	}
 
 	render() {
+		console.log(this.state)
 		return (
 			<div>
 				<SetToken {...this.state} setGithubToken={this._setGithubToken}/>

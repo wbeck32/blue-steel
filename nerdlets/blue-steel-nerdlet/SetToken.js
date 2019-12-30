@@ -2,8 +2,7 @@ import React, {useState} from 'react';
 import { TextField,Button } from 'nr1';
 
 const SetToken = props => {
-	let {githubToken, setGithubToken, getRepoData} = props
-	console.log('githubToken: ', githubToken);
+	let {githubToken, setGithubToken} = props
 
 	const handleChange = e => {
 		githubToken = e.target.value
