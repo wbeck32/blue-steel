@@ -1,12 +1,16 @@
 import React, {Component} from 'react';
-const fetch = require(`cross-fetch`);
+import {Grid,GridItem, BlockText, Stack, StackItem} from 'nr1'
 import queries from './queries'
+import ReactTable from 'react-table';
+
 
 export default class RepoTable extends Component {
 	constructor(props) {
 		super(props);
+
 		this.state = {
 			githubToken: props.githubToken || null,
+			repoData: props.repoData || []
 		}
 	}
 
@@ -15,15 +19,21 @@ export default class RepoTable extends Component {
 		return getRepoData(`https://api.github.com/graphql`, {query:queries[0]})
 	}
 
-
-
 	render() {
-		const {repoData} =this.props
-		console.log('this.propssss: ', repoData, typeof repoData);
-		let tmp = repoData ? repoData.data : []
-		console.log('tmp: ', tmp, typeof tmp);
+		const {repoData} = this.props
 		return(
-			<div>{tmp}WHAAAAATTT</div>
+			<div>
+				{repoData.data &&
+			<Stack>
+				{repoData.data.viewer.repositories.nodes.map(n=>{
+					let name = n.name;
+					<StackItem columnSpan={2}>
+						{name}
+					</StackItem>
+				})}
+			</Stack>
+				}
+			</div>
 		)
 	}
 }

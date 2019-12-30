@@ -38,8 +38,7 @@ export default class PageContainer extends Component {
 				});
 	}
 
-	_query = async (apiUrl, data = {query: `query {  viewer { login }}`,variables: null}) => {
-		const rd = []
+	_query = async (apiUrl, data = {query: ``,variables: null}) => {
 		return await fetch(apiUrl, {
 			method: `POST`,
 			mode: `cors`,
