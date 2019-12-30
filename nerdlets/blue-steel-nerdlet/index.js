@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import PageContainer from './PageContainer'
+import PageContainer from './PageContainer';
 import PropTypes from 'prop-types';
 
 export default class BlueSteelNerdlet extends Component {

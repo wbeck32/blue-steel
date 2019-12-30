@@ -1,16 +1,12 @@
-const queries = [ `query {
-		viewer {
-			repositories(last:5) {
-				totalCount
-				nodes {
-					name
-					createdAt
-					commitComments(last:1) {
-						totalCount
-					}
-				}
-			}
-		}
-	}`, `` ]
+const queries = [ `query ($number_of_repos: Int!) {
+  viewer {
+    name
+    repositories(last: $number_of_repos) {
+      nodes {
+        name
+      }
+    }
+  }
+}`, `` ];
 
 export default queries;

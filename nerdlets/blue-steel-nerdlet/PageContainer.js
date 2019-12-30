@@ -1,7 +1,7 @@
-import React, {Component} from 'react';
-import SetToken from './SetToken'
-import RepoTable from './RepoTable'
-import { Toast, UserStorageMutation} from 'nr1';
+import React, { Component } from 'react';
+import SetToken from './SetToken';
+import RepoTable from './RepoTable';
+import { Toast, UserStorageMutation } from 'nr1';
 import PropTypes from 'prop-types';
 
 export default class PageContainer extends Component {
@@ -12,7 +12,7 @@ export default class PageContainer extends Component {
 		this.state = {
 			githubToken: props.githubToken || null,
 			repoData: props.repoData || []
-		}
+		};
 	}
 
 	_setGithubToken = async githubToken => {
@@ -23,7 +23,7 @@ export default class PageContainer extends Component {
 			document: { githubToken }
 		})
 				.then(() => {
-					this.setState({githubToken})
+					this.setState({ githubToken });
 					Toast.showToast({
 						title: `Update Saved.`,
 						type: Toast.TYPE.NORMAL
@@ -38,7 +38,7 @@ export default class PageContainer extends Component {
 				});
 	}
 
-	_query = async (apiUrl, data = {query: ``,variables: null}) => {
+	_query = async (apiUrl, data = { query: ``, variables: null }) => {
 		return await fetch(apiUrl, {
 			method: `POST`,
 			mode: `cors`,
@@ -50,12 +50,12 @@ export default class PageContainer extends Component {
 			body: JSON.stringify(data)
 		})
 				.then(val=>val.json())
-				.then(repoData =>this.setState({repoData}))
+				.then(repoData =>this.setState({ repoData }));
 	};
 
 
 	render() {
-		const {githubToken, repoData} = this.state
+		const { githubToken, repoData } = this.state;
 		return (
 			<>
 				{githubToken && <RepoTable {...this.state} getRepoData={this._query} repoData={repoData}/>}
