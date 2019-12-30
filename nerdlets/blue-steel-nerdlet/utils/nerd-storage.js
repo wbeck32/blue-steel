@@ -1,7 +1,7 @@
 import React from "react";
 import { Toast, UserStorageMutation, UserStorageQuery } from "nr1";
 
-let setGithubToken = () => {
+const setGithubToken = () => {
   console.log("e: ");
   UserStorageMutation.mutate({
     actionType: UserStorageMutation.ACTION_TYPE.WRITE_DOCUMENT,

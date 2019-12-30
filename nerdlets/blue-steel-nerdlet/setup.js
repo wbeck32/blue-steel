@@ -1,32 +1,40 @@
-import React, { useState } from "react";
-import PropTypes from "prop-types";
+import React, {useState} from 'react';
+import { TextField,Button, StackItem, Stack } from 'nr1';
+import PropTypes from 'prop-types';
 
 const Setup = props => {
-  const handleClick = e => {
-    console.log("e: ", e);
-    this.setState({ token: e.target.value });
-  };
+	let {githubToken, setGithubToken} = props
+	console.log('githubToken: ', githubToken);
 
-  // setGithubToken = async githubToken => {
-  //   console.log("githubToken: ", githubToken.target);
-  //   const mutation = {
-  //     actionType: UserStorageMutation.ACTION_TYPE.WRITE_DOCUMENT,
-  //     collection: "global",
-  //     documentId: "userToken",
-  //     document: { githubToken }
-  //   };
-  //   UserStorageMutation.mutate(mutation);
-  //   // this.setState({ githubToken });
-  // };
+	const handleChange = e =>{
+		console.log('e: ', e.target.value);
+		githubToken = e.target.value
+		console.log('handling it')
+	}
 
-  return (
-    <div>
-      <p>You clicked {props.token} times</p>
-      <button value={props.token} onClick={handleClick}>
-        Click me
-      </button>
-    </div>
-  );
+	return (
+		<div>
+		  <Stack alignmentType="center">
+				<StackItem grow>
+					<TextField
+						autofocus
+						label="GitHub Token"
+						placeholder="Paste your user token here"
+						onChange={e=>handleChange(e)}
+					/>
+				</StackItem>
+				<StackItem>
+					<Button
+						onClick={() => setGithubToken(githubToken)}
+						// disabled={!githubToken || githubToken.length !== 4}
+						type="primary"
+					>
+              Set Your GitHub Token
+					</Button>
+				</StackItem>
+			</Stack>
+		</div>
+	);
 };
 
 export default Setup;

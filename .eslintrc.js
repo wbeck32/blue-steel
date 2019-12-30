@@ -1,53 +1,58 @@
 module.exports = {
-  "env": {
-      "browser": true,
-      "es6": true
+  env: {
+    browser: true,
+    es6: true
   },
-  "extends": [
-  ],
-  "globals": {
-      "Atomics": "readonly",
-      "SharedArrayBuffer": "readonly"
+  extends: [],
+  globals: {
+    Atomics: "readonly",
+    SharedArrayBuffer: "readonly"
   },
-  "parser": "babel-eslint",
-  "parserOptions": {
-      "ecmaFeatures": {
-          "jsx": true
-      },
-      "ecmaVersion": 2018,
-      "sourceType": "module"
+  parser: "babel-eslint",
+  parserOptions: {
+    ecmaFeatures: {
+      jsx: true
+    },
+    ecmaVersion: 8,
+    sourceType: "module"
   },
-  "plugins": [
-      "react",
-  ],
-  "rules": {
-    "array-bracket-newline": [ 2,"never", { "multiline": false } ],
-    "array-bracket-spacing": [ 2, "always",
-        {
-            "arraysInArrays": false,
-            "objectsInArrays": true,
-            "singleValue": true
-        }
+  plugins: ["react"],
+  rules: {
+    "array-bracket-newline": [2, { multiline: false }],
+    "array-bracket-spacing": [
+      2,
+      "always",
+      {
+        arraysInArrays: false,
+        objectsInArrays: true,
+        singleValue: true
+      }
     ],
-    "arrow-parens": [ 2, "as-needed",
-		{
-			"requireForBlockBody": false
-		} ],
-    "array-element-newline": [ "error", "never" ],
-    "eqeqeq": [ 2, "always" ],
-    "indent": [ 2, "tab",
-        {
-            "SwitchCase": 1,
-            "MemberExpression":2,
-            "ObjectExpression": 1
-        }
+    "arrow-parens": [
+      2,
+      "as-needed",
+      {
+        requireForBlockBody: false
+      }
+    ],
+    "array-element-newline": ["error", "never"],
+    eqeqeq: [2, "always"],
+    indent: [
+      2,
+      "tab",
+      {
+        SwitchCase: 1,
+        MemberExpression: 2,
+        ObjectExpression: 1
+      }
     ],
     "newline-before-return": "error",
-    "no-multi-spaces": [ 2,
-		{
-			"ignoreEOLComments": true
-		}
-	],
-    "no-tabs":[ 2, { "allowIndentationTabs": true } ]
+    "no-multi-spaces": [
+      2,
+      {
+        ignoreEOLComments: true
+      }
+    ],
+    "no-tabs": [2, { allowIndentationTabs: true }]
   }
-  }
+};
