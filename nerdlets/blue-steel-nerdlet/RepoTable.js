@@ -1,11 +1,11 @@
 import React from 'react'
-import { StackItem, Button } from 'nr1'
+import {Button } from 'nr1'
 const fetch = require(`cross-fetch`);
 const apiUrl = `https://api.github.com/graphql`;
 
 const RepoTable = props => {
 	console.log('props: ', props);
-
+	const {retrieveGithubToken,githubToken} = props
 
 	const query = (
 		apiUrl,
@@ -27,12 +27,13 @@ const RepoTable = props => {
 				.then(val => val.json())
 				.then(f => f);
 	};
-	return (<div>
-		<StackItem>
+	return (
+		<div>
 
-		</StackItem>
-	</div>)
 
+			<Button onClick={e=>retrieveGithubToken(e)}>vlic</Button>
+		</div>
+	)
 }
 
 export default RepoTable;

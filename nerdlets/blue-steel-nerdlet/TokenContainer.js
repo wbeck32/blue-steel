@@ -1,16 +1,11 @@
 import React, {Component} from 'react';
-import Setup from './Setup'
-import { Toast, UserStorageMutation, UserStorageQuery, StackItem } from 'nr1';
+import SetToken from './SetToken'
+import { Toast, UserStorageMutation, UserStorageQuery} from 'nr1';
 
 export default class TokenContainer extends Component {
 	constructor(props) {
 		super(props);
 		this._setGithubToken = this._setGithubToken.bind(this);
-		this._retrieveGithubToken = this._retrieveGithubToken.bind(this);
-		this.state = {
-			githubToken: null,
-			isTokenSet:false
-		};
 	}
 
 	_setGithubToken = async githubToken => {
@@ -21,7 +16,7 @@ export default class TokenContainer extends Component {
 			document: { githubToken }
 		})
 				.then(() => {
-					this.setState({githubToken, isTokenSet:true})
+					this.setState({githubToken})
 					Toast.showToast({
 						title: `Update Saved.`,
 						type: Toast.TYPE.NORMAL
@@ -36,39 +31,10 @@ export default class TokenContainer extends Component {
 				});
 	}
 
-	_retrieveGithubToken = async () => {
-		UserStorageQuery.query({
-			collection: `blue-steel`,
-			documentId: 'global'
-		})
-				.then(data => {
-					if (!data) {
-						console.log(`Cannot`);
-					}
-					console.log('data: ', data);
-					this.setState({ githubToken: data.githubToken, isTokenSet:this.state.isTokenSet });
-				})
-				.catch(error => {
-					console.error(error);
-					this.setState({ githubToken: `` });
-					Toast.showToast({
-						title: error.message,
-						type: Toast.TYPE.CRITICAL
-					});
-				});
-	};
-
-
 	render() {
-		const {githubToken,isTokenSet} = this.state
-		console.log('githubToken,isTokenSet: ', githubToken,isTokenSet);
 		return (
 			<div>
-				<StackItem>
-					{!isTokenSet && <Setup {...this.state} setGithubToken={this._setGithubToken}/>}
-					{isTokenSet && <Setup {...this.state} retrieveGithubToken={this._retrieveGithubToken}/>}
-				</StackItem>
-			</div>
-		);
+				<SetToken {...this.state} setGithubToken={this._setGithubToken}/>
+			</div>);
 	};
 }
