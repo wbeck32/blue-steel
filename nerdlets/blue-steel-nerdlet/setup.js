@@ -3,16 +3,15 @@ import { TextField,Button, StackItem, Stack } from 'nr1';
 import PropTypes from 'prop-types';
 
 const Setup = props => {
-	let {githubToken, setGithubToken, retrieveGithubToken} = props
-	console.log('githubToken, retrieveGithubToken: ', githubToken, retrieveGithubToken);
+	let {githubToken, isTokenSet,setGithubToken, retrieveGithubToken} = props
+	console.log('githubToken: ', githubToken,isTokenSet);
 
 	const handleChange = e => {
 		githubToken = e.target.value
 	}
 	return (
 		<div>
-		  <Stack alignmentType="center">
-				{!githubToken &&
+			{!isTokenSet &&
 				<div>
 					<StackItem grow>
 						<TextField
@@ -31,16 +30,15 @@ const Setup = props => {
 						</Button>
 					</StackItem>
 				</div>
-				}
-				{githubToken && <StackItem>
-					<Button
-						onClick={() => retrieveGithubToken()}
-						type="primary"
-					>
+			}
+			{isTokenSet && githubToken && <StackItem>
+				<Button
+					onClick={() => retrieveGithubToken()}
+					type="primary"
+				>
               retrieve GitHub Token
-					</Button>
-				</StackItem>}
-			</Stack>
+				</Button>
+			</StackItem>}
 		</div>
 	);
 };
