@@ -1,18 +1,45 @@
 import React, { Component } from "react";
-import { Button } from "nr1";
+import { Button, UserStorageMutation } from "nr1";
 import query from "./utils/github-query";
-
+import Setup from "./setup";
+import ErrorBoundary from "./utils/ErrorBoundary";
 // https://docs.newrelic.com/docs/new-relic-programmable-platform-introduction
 
 export default class BlueSteelNerdlet extends Component {
-  getStuff = async () => {
+  constructor(props) {
+    super(props);
+    this._getStuff = this._getStuff.bind(this);
+    this._setGithubToken = this._setGithubToken.bind(this);
+    this.state = {
+      token: 123
+    };
+  }
+
+  _getStuff = async () => {
     const myRepos = await query();
     return myRepos;
   };
 
-  render() {
-    console.log("process.env.GITHUB_PERSONAL_TOKEN: ", process.env);
+  _setGithubToken = async githubToken => {
+    console.log("githubToken: ", githubToken);
+    const mutation = {
+      actionType: UserStorageMutation.ACTION_TYPE.WRITE_DOCUMENT,
+      collection: "global",
+      documentId: "userToken",
+      document: { githubToken }
+    };
+    UserStorageMutation.mutate(mutation);
+    this.setState({ githubToken });
+  };
 
-    return <Button onClick={() => this.getStuff()}>clicky</Button>;
+  render() {
+    console.log("this.state: ", this.state);
+    return (
+      <div>
+        <ErrorBoundary>
+          <Setup {...this.state}>setting up</Setup>
+        </ErrorBoundary>
+      </div>
+    );
   }
 }

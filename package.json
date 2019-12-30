@@ -4,16 +4,18 @@
   "version": "0.1.0",
   "scripts": {
     "start": "nr1 nerdpack:serve",
-    "test": "exit 0"
+    "test": "exit 0",
+    "eslint-fix": "eslint nerdlets/ --fix"
   },
   "nr1": {
-    "uuid": "3994182f-6b00-4c02-a767-852f8e03c58e"
+    "uuid": "43bc8f6b-6100-420e-b2d8-fed58737c111"
   },
   "dependencies": {
+    "@babel/polyfill": "^7.7.0",
     "cross-fetch": "^3.0.4",
     "prop-types": "^15.7.2",
-    "react": "^16.6.3",
-    "react-dom": "^16.6.3"
+    "react": "16.8.4",
+    "react-dom": "16.8.4"
   },
   "browserslist": [
     "last 2 versions",
@@ -21,11 +23,28 @@
     "not dead"
   ],
   "devDependencies": {
-    "babel-eslint": "^10.0.3",
-    "babel-runtime": "^6.26.0",
+    "@babel/cli": "^7.7.7",
+    "@babel/core": "^7.7.7",
+    "@babel/helpers": "^7.6.2",
+    "@babel/plugin-proposal-class-properties": "^7.5.5",
+    "@babel/plugin-proposal-object-rest-spread": "^7.6.2",
+    "@babel/plugin-syntax-dynamic-import": "^7.2.0",
+    "@babel/plugin-transform-arrow-functions": "^7.7.4",
+    "@babel/plugin-transform-async-to-generator": "^7.5.0",
+    "@babel/plugin-transform-runtime": "^7.6.2",
+    "@babel/preset-env": "^7.7.7",
+    "@babel/preset-react": "^7.7.4",
+    "@babel/register": "^7.6.2",
+    "@babel/runtime": "^7.6.3",
     "@newrelic/eslint-plugin-newrelic": "^0.3.0",
+    "babel-eslint": "^10.0.3",
+    "babel-loader": "^8.0.6",
+    "babel-runtime": "^6.26.0",
     "eslint": "^6.8.0",
     "prettier": "^1.19.1",
-    "typescript": "^3.7.4"
+    "typescript": "^3.7.4",
+    "webpack": "^4.41.5",
+    "webpack-cli": "^3.3.10",
+    "webpack-dev-server": "^3.10.1"
   }
 }

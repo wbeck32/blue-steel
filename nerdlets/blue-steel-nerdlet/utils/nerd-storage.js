@@ -1,11 +1,12 @@
 import React from "react";
 import { Toast, UserStorageMutation, UserStorageQuery } from "nr1";
 
-const saveData = () => {
+let setGithubToken = () => {
+  console.log("e: ");
   UserStorageMutation.mutate({
     actionType: UserStorageMutation.ACTION_TYPE.WRITE_DOCUMENT,
     collection: `blue-steel`,
-    documentId: 0,
+    documentId: "global",
     document: { githubToken: process.env.GITHUB_PERSONAL_TOKEN }
   })
     .then(() => {
@@ -23,9 +24,8 @@ const saveData = () => {
     });
 };
 
-saveData();
-
-const retrieveData = () => {
+const retrieveData = e => {
+  console.log("e: ", e);
   UserStorageQuery.query({
     collection: `blue-steel`,
     documentId: 0
@@ -35,14 +35,16 @@ const retrieveData = () => {
         console.log(`Cannot`);
       }
       console.debug(data);
-      this.setState({ githubToken: data.githubToken });
+      // this.setState({ githubToken: data.githubToken });
     })
     .catch(error => {
       console.error(error);
-      this.setState({ githubToken: `` });
+      // this.setState({ githubToken: `` });
       Toast.showToast({
         title: error.message,
         type: Toast.TYPE.CRITICAL
       });
     });
 };
+
+export default setGithubToken;
