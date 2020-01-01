@@ -17,7 +17,7 @@ const SetToken = props => {
 					onChange={e => handleChange(e)}
 				/>
 				<Button
-					onClick={() => setGithubToken('6621343423eed73e413504555117e4d932e5a57c')}
+					onClick={() => setGithubToken(githubToken)}
 					type="primary"
 				>
               Set Your GitHub Token
