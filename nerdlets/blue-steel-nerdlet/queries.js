@@ -26,18 +26,24 @@ const queries = [ `query ($number_of_repos: Int!) {
     }
   }
 }`, `query {
-	securityVulnerabilities(first: 100, orderBy: {field: UPDATED_AT, direction: ASC}, severities: CRITICAL) {
-    		nodes {
-      		advisory {
-        		summary
-        		severity
-        		updatedAt
-      		}
-      	package {
-        	name
-      	}
-    	}
-  	}
-	}` ];
+  viewer {
+    name
+    repositories(first: 100) {
+      nodes {
+        name
+        vulnerabilityAlerts(first: 100) {
+          totalCount
+          nodes {
+            securityAdvisory {
+              severity
+              summary
+              updatedAt
+            }
+          }
+        }
+      }
+    }
+  }
+}` ];
 
 export default queries;

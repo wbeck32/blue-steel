@@ -16,7 +16,7 @@ export default class RepoTable extends Component {
 		const { getRepoData } = this.props;
 		return getRepoData(`https://api.github.com/graphql`, {
 			query:queries[3],
-			variables:  null
+			variables:  { "number_of_repos":5 }
 		});
 	}
 
@@ -42,7 +42,8 @@ export default class RepoTable extends Component {
 		function traverseObject(obj) {
 			for (var key in obj) {
 				if (obj.hasOwnProperty(key)) {
-					console.log('key: ', key, obj[key]);
+					console.log('key: ', key);
+					if(key === 'nodes') console.log('value: ', obj[key]);
 					traverse(obj[key]);
 				}
 			}
@@ -52,15 +53,13 @@ export default class RepoTable extends Component {
 			return Object.prototype.toString.call(o) === '[object Array]';
 		}
 
-		// usage:
 		traverse(repoData);
 		return(
 			<div>{repoData.data &&
 				<div>
-wha
+no
 				</div>
 			}
-
 			</div>
 		);
 	}
