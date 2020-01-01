@@ -5,7 +5,6 @@ import queries from './queries';
 export default class RepoTable extends Component {
 	constructor(props) {
 		super(props);
-		// this.deepIterator = this.deepIterator.bind(this);
 
 		this.state = {
 			githubToken: props.githubToken || null,
@@ -14,33 +13,47 @@ export default class RepoTable extends Component {
 	}
 
 	componentDidMount() {
-		// console.log('queries[0]: ', queries[2]);
 		const { getRepoData } = this.props;
 		return getRepoData(`https://api.github.com/graphql`, {
-			query:queries[2],
-			variables:  { "number_of_repos":20 }
+			query:queries[3],
+			variables:  null
 		});
 	}
 
 	render() {
 		const { repoData } = this.props;
-		console.log('repoData: ', Object.values(repoData));
-		let data = Object.values(repoData);
-		const recurse = data => {
-			console.log('data: ', data);
-			if(typeof data === 'object') {
-				data.map(d =>{
-					console.log('d: ', d, Object.values(d).length);
-					if(Object.values(d).length > 0) {
-						console.log('Object.values(d): ', Object.values(d));
-						data = Object.values(Object.values(d));
-						recurse(data);
-					}
-				});
+
+		function traverse(x) {
+			if (isArray(x)) {
+				traverseArray(x);
+			} else if ((typeof x === 'object') && (x !== null)) {
+				traverseObject(x);
+			} else {
+
 			}
-			else return;
-		};
-		recurse(data);
+		}
+
+		function traverseArray(arr) {
+			arr.forEach(function (x) {
+				traverse(x);
+			});
+		}
+
+		function traverseObject(obj) {
+			for (var key in obj) {
+				if (obj.hasOwnProperty(key)) {
+					console.log('key: ', key, obj[key]);
+					traverse(obj[key]);
+				}
+			}
+		}
+
+		function isArray(o) {
+			return Object.prototype.toString.call(o) === '[object Array]';
+		}
+
+		// usage:
+		traverse(repoData);
 		return(
 			<div>{repoData.data &&
 				<div>
