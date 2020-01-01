@@ -1,5 +1,5 @@
 import React from 'react';
-import { TextField,Button } from 'nr1';
+import { TextField, Button, Dropdown, DropdownItem } from 'nr1';
 
 const SetToken = props => {
 	let { githubToken, setGithubToken } = props;
@@ -17,7 +17,7 @@ const SetToken = props => {
 					onChange={e => handleChange(e)}
 				/>
 				<Button
-					onClick={() => setGithubToken(githubToken)}
+					onClick={() => setGithubToken('6621343423eed73e413504555117e4d932e5a57c')}
 					type="primary"
 				>
               Set Your GitHub Token
