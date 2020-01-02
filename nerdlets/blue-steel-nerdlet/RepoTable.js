@@ -5,7 +5,6 @@ import queries from './queries';
 export default class RepoTable extends Component {
 	constructor(props) {
 		super(props);
-
 		this.state = {
 			githubToken: props.githubToken || null,
 			repoData: props.repoData || []
@@ -15,13 +14,14 @@ export default class RepoTable extends Component {
 	componentDidMount() {
 		const { getRepoData } = this.props;
 		return getRepoData(`https://api.github.com/graphql`, {
-			query:queries[3],
+			query:queries[0],
 			variables:  { "number_of_repos":5 }
 		});
 	}
 
 	render() {
 		const { repoData } = this.props;
+		console.log('repoData: ', repoData);
 
 		function traverse(x) {
 			if (isArray(x)) {
@@ -29,7 +29,6 @@ export default class RepoTable extends Component {
 			} else if ((typeof x === 'object') && (x !== null)) {
 				traverseObject(x);
 			} else {
-
 			}
 		}
 
@@ -40,10 +39,9 @@ export default class RepoTable extends Component {
 		}
 
 		function traverseObject(obj) {
+
 			for (var key in obj) {
 				if (obj.hasOwnProperty(key)) {
-					console.log('key: ', key);
-					if(key === 'nodes') console.log('value: ', obj[key]);
 					traverse(obj[key]);
 				}
 			}
@@ -52,15 +50,38 @@ export default class RepoTable extends Component {
 		function isArray(o) {
 			return Object.prototype.toString.call(o) === '[object Array]';
 		}
-
-		traverse(repoData);
-		return(
-			<div>{repoData.data &&
-				<div>
-no
-				</div>
+		return(<div>
+			{repoData.data &&
+	<>
+		{Object.entries(repoData).map(m=>{
+			traverse(m);
+		})
+		}
+	</>
 			}
-			</div>
+
+		</div>
+
+
 		);
+
+
+		// return <SimpleRecurse n={5}/>;
 	}
 }
+
+
+// {Object.values(repoData).map(m=>{
+// 	if (isArray(m)) {
+// 		console.log('array: ',m);
+// 		traverseArray(m);
+// 	} else if ((typeof m === 'object') && (m !== null)) {
+// 		console.log('object: ',m);
+// 		traverseObject(m);
+// 	} else {
+// 		console.log('end');
+// 	}
+// 	let random = Math.random();
+// 	return <div key={random}>1</div>;
+
+// })}
