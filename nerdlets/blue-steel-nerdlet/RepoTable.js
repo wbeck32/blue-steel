@@ -64,24 +64,5 @@ export default class RepoTable extends Component {
 
 
 		);
-
-
-		// return <SimpleRecurse n={5}/>;
 	}
 }
-
-
-// {Object.values(repoData).map(m=>{
-// 	if (isArray(m)) {
-// 		console.log('array: ',m);
-// 		traverseArray(m);
-// 	} else if ((typeof m === 'object') && (m !== null)) {
-// 		console.log('object: ',m);
-// 		traverseObject(m);
-// 	} else {
-// 		console.log('end');
-// 	}
-// 	let random = Math.random();
-// 	return <div key={random}>1</div>;
-
-// })}
