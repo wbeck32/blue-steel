@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
-import { Card, CardHeader, CardBody } from 'nr1';
+import { Card, CardHeader, CardBody, BlockText } from 'nr1';
 import queries from './queries';
+import ErrorBoundary from './ErrorBoundary';
+import _ from 'lodash';
 
 export default class RepoTable extends Component {
 	constructor(props) {
 		super(props);
+		// this._data = this._data.bind(this);
+
 		this.state = {
 			githubToken: props.githubToken || null,
 			repoData: props.repoData || []
@@ -19,50 +23,31 @@ export default class RepoTable extends Component {
 		});
 	}
 
+
 	render() {
 		const { repoData } = this.props;
-		console.log('repoData: ', repoData);
-
-		function traverse(x) {
-			if (isArray(x)) {
-				traverseArray(x);
-			} else if ((typeof x === 'object') && (x !== null)) {
-				traverseObject(x);
-			} else {
-			}
-		}
-
-		function traverseArray(arr) {
-			arr.forEach(function (x) {
-				traverse(x);
-			});
-		}
-
-		function traverseObject(obj) {
-
-			for (var key in obj) {
-				if (obj.hasOwnProperty(key)) {
-					traverse(obj[key]);
+		const Data=data =>{
+			const nestedData = _.map(_.reduce(data), ((e,f)=>{
+				let random = Math.random();
+				return <div key={random}>hello:{f}</div>;
+			}));
+			return(
+				<div>{nestedData}</div>
+			);};
+		return(
+			<div>
+				{repoData.data &&
+				<div>
+					{_.map(_.reduce(repoData), ((v,k) =>{
+						let random = Math.random();
+						if (_.isString(k)) {
+							return <Data data={v} key={random}>{k}</Data>;
+						}
+					}))
+					}
+				</div>
 				}
-			}
-		}
-
-		function isArray(o) {
-			return Object.prototype.toString.call(o) === '[object Array]';
-		}
-		return(<div>
-			{repoData.data &&
-	<>
-		{Object.entries(repoData).map(m=>{
-			traverse(m);
-		})
-		}
-	</>
-			}
-
-		</div>
-
-
+			</div>
 		);
 	}
 }
