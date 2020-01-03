@@ -2,7 +2,10 @@ import React, { Component } from 'react';
 import { Card, CardHeader, CardBody, BlockText } from 'nr1';
 import queries from './queries';
 import ErrorBoundary from './ErrorBoundary';
-import _ from 'lodash';
+import lodash from 'lodash';
+import deepdash from 'deepdash-es';
+const _ = deepdash(lodash);
+import traverse from 'traverse';
 
 export default class RepoTable extends Component {
 	constructor(props) {
@@ -19,35 +22,29 @@ export default class RepoTable extends Component {
 		const { getRepoData } = this.props;
 		return getRepoData(`https://api.github.com/graphql`, {
 			query:queries[0],
-			variables:  { "number_of_repos":5 }
+			variables:  { "number_of_repos":10 }
 		});
 	}
 
 
 	render() {
 		const { repoData } = this.props;
-		const Data=data =>{
-			const nestedData = _.map(_.reduce(data), ((e,f)=>{
-				let random = Math.random();
-				return <div key={random}>hello:{f}</div>;
-			}));
-			return(
-				<div>{nestedData}</div>
-			);};
 		return(
-			<div>
+			<>
 				{repoData.data &&
 				<div>
-					{_.map(_.reduce(repoData), ((v,k) =>{
+				 {_.map(repoData.data.viewer, ((v,k) =>{
 						let random = Math.random();
-						if (_.isString(k)) {
-							return <Data data={v} key={random}>{k}</Data>;
+						if(k==='repos10') {
+							return _.map(v.nodes,((calue,cey)=>{
+								return <div style={{ "marginLeft": "25px", "marginTop": "10px" }} key={random}>{calue.name}</div>;
+							}));
 						}
 					}))
 					}
 				</div>
 				}
-			</div>
+			</>
 		);
 	}
 }
