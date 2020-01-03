@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import { Card, CardHeader, CardBody, Dropdown,DropdownItem } from 'nr1';
+import { Card, CardHeader, CardBody, HeadingText } from 'nr1';
 import queries from './queries';
-import ErrorBoundary from './ErrorBoundary';
-import lodash from 'lodash';
+import _ from 'lodash';
 
 export default class RepoTable extends Component {
 	constructor(props) {
@@ -15,7 +14,8 @@ export default class RepoTable extends Component {
 
 	componentDidMount() {
 		const { getRepoData, actionIndex } = this.props;
-		let num = actionIndex.index <= 10 ? ( actionIndex.index-1 ) * 10 : null;
+		let num = actionIndex.index <= 10 ? ( actionIndex.index ) * 10 : null;
+		// TODO: get queries by index instead of hard-coding array value
 		return getRepoData(`https://api.github.com/graphql`, {
 			query:queries[0],
 			variables:  { "number_of_repos":num }
@@ -24,20 +24,35 @@ export default class RepoTable extends Component {
 
 
 	render() {
-		const { repoData } = this.props;
+		const { repoData, actionIndex } = this.props;
+		// TODO: more styling and accessibility
 		return(
 			<>
+				<HeadingText spacingType={[ HeadingText.SPACING_TYPE.EXTRA_LARGE ]}>Last {actionIndex.index*10} repositories updated</HeadingText>
 				{repoData.data &&
-				<div>
+				<Card style={{ border:'2px solid #3A8B99' }}>
+					<div>
 				 {_.map(repoData.data.viewer, ((v,k) =>{
-					 console.log('v,k: ', v,k);
-						let random = Math.random();
-						return _.map(v.nodes,((calue,cey)=>{
-							return <div style={{ "marginLeft": "25px", "marginTop": "10px" }} key={`${calue.name}-${random}`}>{calue.name}</div>;
-						}));
-					}))
-					}
-				</div>
+					 return _.map(v.nodes,((value,repoKey)=>{
+								let random = Math.random();
+								// TODO: normalize date format
+								return (<CardHeader style={{ borderBottom:'2px solid #3A8B99' }} title={value.name} key={`${value.name}-${random}`} subtitle={`Last updated: ${value.updatedAt}`}>
+									<CardBody>
+										{/* TODO: add content! */}
+										<img src={value.openGraphImageUrl}/>;
+										{_.map(value,((val,key)=>{
+											// TODO: I'd like to iterate through all the key-value pairs and show the needed fields
+											// TODO: improve recursiveness code
+											let random = Math.random();
+											return (<div key={random}>{key}: {val}</div>);
+										}))}
+									</CardBody>
+								</CardHeader>);
+							}));
+						}))
+						}
+					</div>
+				</Card>
 				}
 			</>
 		);

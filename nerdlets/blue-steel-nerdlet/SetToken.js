@@ -1,5 +1,6 @@
 import React from 'react';
-import { TextField, Button, Dropdown, DropdownItem } from 'nr1';
+import { TextField, Dropdown, DropdownItem } from 'nr1';
+
 
 const SetToken = props => {
 	let { githubToken, setGithubToken } = props;
@@ -9,13 +10,15 @@ const SetToken = props => {
 	};
 
 	const handleClick = index => {
-		setGithubToken('ae67fdb6ed1f22a9f93f850a56be28757181f959',index);
+		setGithubToken(githubToken,index);
 	};
 
 	const quantities = new Array(10).fill().map((_, i) => `${i*10} repositories`);
-	const items = [ 'Security vulnerabilities', ...quantities ];
+	// TODO: remove 0 from the array values
+	// TODO: scss isn't appearing?
+	const items = [ ...quantities ];
 	const actionDropdown = (
-		<Dropdown spacingType={[ Dropdown.SPACING_TYPE.EXTRA_LARGE ]} title="Select a dataset" items={items}>
+		<Dropdown style={{ marginTop:'-20px' }} spacingType={[ Dropdown.SPACING_TYPE.EXTRA_LARGE ]} title="Select a dataset" items={items}>
 			{({ item, index }) => (
 				<DropdownItem key={index} value={index} onClick={item => handleClick({ index })}>
 					{item}

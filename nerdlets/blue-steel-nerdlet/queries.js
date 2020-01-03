@@ -1,43 +1,53 @@
+// TODO: Create more queries and implement pagination, fragments and directives
 const queries = [ `query ($number_of_repos: Int!) {
   viewer {
     name
-    repositories(first: $number_of_repos) {
+    repositories(first: $number_of_repos,orderBy: {field: UPDATED_AT, direction: DESC}) {
       nodes {
-        name
+				name
+				updatedAt
+				openGraphImageUrl
       }
 		}
   }
-}`, `query ($number_of_repos: Int!) {
+}`, `query($number_of_repos: Int!) {
   viewer {
+    login
     name
-    repositories(last: $number_of_repos) {
+    repositories(first: $number_of_repos, orderBy: {field: CREATED_AT, direction: DESC}) {
+      totalCount
       nodes {
         name
+        createdAt
+        issueOrPullRequest(number: 3) {
+          ... on PullRequest {
+            title
+            updatedAt
+            author {
+              ... on User {
+                name
+              }
+            }
+            changedFiles
+            deletions
+            state
+          }
+        }
       }
     }
   }
-}`, `query ($number_of_repos: Int!) {
-  viewer {
-    name
-    repositories(last: $number_of_repos) {
-      nodes {
-        name
-      }
-    }
-  }
-}`, `query {
+}`,`query {
   viewer {
     name
     repositories(first: 100) {
       nodes {
         name
         vulnerabilityAlerts(first: 100) {
-          totalCount
           nodes {
+            packageName
             securityAdvisory {
               severity
               summary
-              updatedAt
             }
           }
         }

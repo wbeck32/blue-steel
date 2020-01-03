@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import SetToken from './SetToken';
 import RepoTable from './RepoTable';
 import { Toast, UserStorageMutation } from 'nr1';
-import PropTypes from 'prop-types';
 
 export default class PageContainer extends Component {
 	constructor(props) {
@@ -25,7 +24,7 @@ export default class PageContainer extends Component {
 				.then(() => {
 					this.setState({ githubToken, actionIndex });
 					Toast.showToast({
-						title: `Update Saved.`,
+						title: `Token saved.`,
 						type: Toast.TYPE.NORMAL
 					});
 				})
