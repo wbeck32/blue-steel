@@ -4,9 +4,12 @@
 
 This application uses NerdStorage to store and retrieve your Github personal access token. You can then configure a GraphQl query and trigger it to retrieve the specified data from your account.
 
-Ideally, it will iterate through your data and display it in a table. It's not doing that yet though.
+Ideally, it will iterate through your data and display it in a table.
+
+There are quite a few TODOs in the code - the nerdlet has a lot of potential.
 
 ![Screenshot #1](screenshots/screenshot_01.png)
+![Screenshot #2](screenshots/screenshot_02.png)
 
 ## Open Source License
 
@@ -16,10 +19,7 @@ This project is distributed under the [Apache 2 license](LICENSE).
 
 Required:
 
-- [New Relic Infrastructure agent(s) installed](https://docs.newrelic.com/docs/agents/manage-apm-agents/installation/install-agent#infra-install) on your cloud computing devices and the related access to [New Relic One](https://newrelic.com/platform).
-
-You'll get the best possible data out of this application if you also:
-
+You'll get the best possible data out of this application if you:
 
 - [Test your queries in the Github GraphQl Explorer ](https://developer.github.com/v4/explorer/)
 
