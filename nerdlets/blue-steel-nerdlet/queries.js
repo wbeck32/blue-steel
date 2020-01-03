@@ -1,11 +1,11 @@
 const queries = [ `query ($number_of_repos: Int!) {
   viewer {
     name
-    repositories(last: $number_of_repos) {
+    repositories(first: $number_of_repos) {
       nodes {
         name
       }
-    }
+		}
   }
 }`, `query ($number_of_repos: Int!) {
   viewer {

@@ -11,11 +11,11 @@ export default class PageContainer extends Component {
 		this._query = this._query.bind(this);
 		this.state = {
 			githubToken: props.githubToken || null,
-			repoData: props.repoData || []
+			repoData: props.repoData || [],
 		};
 	}
 
-	_setGithubToken = async githubToken => {
+	_setGithubToken = async (githubToken, actionIndex) => {
 		UserStorageMutation.mutate({
 			actionType: UserStorageMutation.ACTION_TYPE.WRITE_DOCUMENT,
 			collection: `blue-steel`,
@@ -23,7 +23,7 @@ export default class PageContainer extends Component {
 			document: { githubToken }
 		})
 				.then(() => {
-					this.setState({ githubToken });
+					this.setState({ githubToken, actionIndex });
 					Toast.showToast({
 						title: `Update Saved.`,
 						type: Toast.TYPE.NORMAL
